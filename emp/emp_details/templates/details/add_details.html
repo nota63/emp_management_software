@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Soft blue background */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        /* Reduce overall form size */
+        form {
+            width: 500px; /* Further reduce form width */
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px; /* Rounded corners for form */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Style inputs and labels */
+        form label, form input[type="text"], form input[type="email"], form select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 10px; /* Reduced font size */
+        }
+
+        /* Style buttons */
+        button[type="submit"] {
+            background-color: #2196f3; /* Blue color */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners for buttons */
+        }
+
+        /* Additional button styling */
+        .btn a button {
+            background-color: #2196f3; /* Blue color */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners for buttons */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from("form", { duration: 1, y: "-50%", opacity: 0, ease: "bounce" });
+            gsap.from("h5", { duration: 1, y: "-50%", opacity: 0, delay: 0.5, ease: "bounce" });
+            gsap.from("section p", { duration: 1, y: "-50%", opacity: 0, delay: 1, ease: "bounce" });
+            gsap.from(".btn a button", { duration: 1, y: "-50%", opacity: 0, delay: 1.5, ease: "bounce" });
+        });
+    </script>
+</head>
+<body>
+
+
+<br>
+<br>
+<section>
+    {% if messages %}
+        {% for m in messages %}
+            <p style="font-size: 10px; text-align: center;">{{ m }}</p>
+        {% endfor %}
+    {% endif %}
+</section>
+
+<section>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </form>
+</section>
+
+<div class="btn" style="text-align: center; margin-top: 10px;">
+    <a href="{% url 'view_emp_details' %}">
+        <button type="button">View Details</button>
+    </a>
+</div>
+
+</body>
+</html>
+

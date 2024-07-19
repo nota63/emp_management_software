@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6f86d6, #48c6ef);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+        }
+
+        h4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .button-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .button-link {
+            text-decoration: none;
+        }
+
+        .button {
+            width: 200px;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #333;
+            background-color: #ffdd57;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
+</head>
+<body>
+    <h4>Hey there HR, you are logged in successfully</h4>
+
+    <div class="button-section">
+        <a href="{% url 'create_and_view_id_card' %}" class="button-link">
+            <button class="button" type="button">Generate ID Card</button>
+        </a>
+        <a href="{% url 'add_details' %}" class="button-link">
+            <button class="button" type="button">Employee Details</button>
+        </a>
+    </div>
+
+    <script>
+        gsap.from("h4", { duration: 1, opacity: 0, y: -50 });
+        gsap.from(".button", { duration: 1, opacity: 0, scale: 0.5, stagger: 0.2 });
+    </script>
+</body>
+</html>

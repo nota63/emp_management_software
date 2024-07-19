@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create ID Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9f0f8; /* Light blue background */
+            font-size: 5px; /* Smaller font size for readability */
+            font-family: Arial, sans-serif; /* Font family for better compatibility */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        .container {
+            max-width: 300px; /* Limit width for compact design */
+            margin: 50px auto; /* Center align and add margin for space */
+            padding: 15px; /* Add padding for better spacing */
+            background-color: #ffffff; /* White background */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        }
+        h2 {
+            text-align: center; /* Center align heading */
+            margin-bottom: 15px; /* Add space below heading */
+            color: #007bff; /* Blue heading color */
+            font-size: 10px; /* Smaller font size */
+        }
+        .form-group {
+            margin-bottom: 8px; /* Space between form groups */
+        }
+        label {
+            font-weight: bold; /* Bold labels for emphasis */
+            font-size: 8px; /* Smaller font size for labels */
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%; /* Full width input fields */
+            padding: 6px; /* Reduced padding for input fields */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 3px; /* Rounded corners for inputs */
+            font-size: 8px; /* Smaller font size for inputs */
+        }
+        button[type="submit"] {
+            width: 100%; /* Full width submit button */
+            padding: 5px; /* Reduced padding for button */
+            border: none; /* Remove default button border */
+            background-color: #007bff; /* Blue primary button color */
+            color: #fff; /* White text color */
+            border-radius: 3px; /* Rounded corners for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 8px; /* Smaller font size for button */
+            line-height: 1.5; /* Ensure text is vertically centered */
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Employee ID Card</h2>
+        <form method="post" enctype="multipart/form-data" id="idCardForm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="emp_name">Employee Name</label>
+                <input type="text" class="form-control" id="emp_name" name="emp_name" required>
+            </div>
+            <div class="form-group">
+                <label for="emp_role">Employee Role</label>
+                <input type="text" class="form-control" id="emp_role" name="emp_role" required>
+            </div>
+            <div class="form-group">
+                <label for="emp_id">Employee ID</label>
+                <input type="text" class="form-control" id="emp_id" name="emp_id" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Employee Photo</label>
+                <input type="file" class="form-control" id="photo" name="photo" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create ID Card</button>
+        </form>
+    </div>
+
+    <!-- GSAP Animation Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+    <script>
+        gsap.from(".container", { opacity: 0, y: 50, duration: 1 });
+    </script>
+</body>
+</html>

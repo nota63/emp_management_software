@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profiles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Google Fonts Roboto -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> <!-- GSAP Library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f5f9; /* Soft blue background color */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align content to the top */
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 1s ease; /* GSAP animation */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db; /* Light blue header */
+            color: #fff;
+            font-weight: 500; /* Medium weight */
+        }
+        td {
+            font-size: 6px; /* Adjustable font size */
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            gsap.from(".container", { opacity: 0, y: -50, duration: 1 });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Profiles</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Job Title</th>
+                    <th>Department</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                    <th>Profile Picture</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.first_name }}</td>
+                    <td>{{ profile.last_name }}</td>
+                    <td>{{ profile.email }}</td>
+                    <td>{{ profile.job_title }}</td>
+                    <td>{{ profile.department }}</td>
+                    <td>{{ profile.contact_number }}</td>
+                    <td>{{ profile.address }}</td>
+                    <td>
+                        {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+                        {% else %}
+                        No Picture
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

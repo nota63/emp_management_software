@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.8em;
+            min-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        table th, table td {
+            padding: 8px 10px;
+        }
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        h2 {
+            color: #333;
+        }
+        .delete-button {
+            color: #ffffff;
+            background-color: #e74c3c;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+        .download-button {
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 0.5em;
+        }
+        .download-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from(".container", { duration: 1.5, opacity: 0, y: -50, ease: "bounce" });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Asset History</h2>
+        <section>
+            <form method="get">
+                <input type="text" name="a_search" value="">
+                <button type="submit">Find</button>
+            </form>
+        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Employee Role</th>
+                    <th>Asset</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asset in assets %}
+                <tr>
+                    <td>{{ asset.emp_name }}</td>
+                    <td>{{ asset.emp_role }}</td>
+                    <td>{{ asset.asset }}</td>
+                    <td>{{ asset.date }}</td>
+                    <td>
+                        <form method="post" action="{% url 'delete_assets' asset.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">No Data Found!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'download_assets' %}" class="download-button">Download Assets</a>
+    </div>
+</body>
+</html>

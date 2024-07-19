@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6f86d6, #48c6ef);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+        }
+
+        header {
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            margin-left: 10px;
+        }
+
+        .logo img {
+            width: 60px; /* Adjust size as needed */
+            height: 60px; /* Adjust size as needed */
+            object-fit: cover;
+            border-radius: 50%; /* Rounded shape */
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em; /* Smaller font size */
+            padding: 5px; /* Smaller padding */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .search-bar {
+            margin-right: 10px;
+        }
+
+        .search-bar input {
+            padding: 3px; /* Smaller padding */
+            border-radius: 3px; /* Smaller border radius */
+            border: none;
+            font-size: 0.8em; /* Smaller font size */
+        }
+
+        .cta-button {
+            padding: 5px 10px; /* Smaller padding */
+            background-color: #ffdd57;
+            color: #333;
+            border: none;
+            border-radius: 3px; /* Smaller border radius */
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7em; /* Smaller font size */
+            margin-right: 10px;
+        }
+
+        .cta-button:hover {
+            background-color: #ffcc00;
+        }
+
+        .social-media-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .social-media-icons a {
+            margin-right: 5px;
+        }
+
+        .social-media-icons img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%; /* Rounded shape */
+        }
+
+        .welcome-message, .login-message {
+            font-size: 1em; /* Adjust as needed */
+            margin-bottom: 10px;
+        }
+
+        .welcome-message {
+            font-weight: 700;
+        }
+
+        .login-message a {
+            color: #ffdd57;
+            text-decoration: none;
+        }
+
+        .login-message a:hover {
+            text-decoration: underline;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust icon size */
+            gap: 10px; /* Smaller gap */
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        .icon-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px; /* Smaller padding */
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px; /* Smaller border radius */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .icon {
+            width: 25px; /* Smaller icon size */
+            height: 25px; /* Smaller icon size */
+            object-fit: cover;
+            border-radius: 5px; /* Smaller border radius */
+        }
+
+        .icon-link:hover {
+            transform: translateY(-3px); /* Adjust hover effect */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Adjust box shadow */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        main {
+            padding-top: 80px; /* Adjust top padding */
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="static/my.png" alt="Company Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'coming_soon'%}">About</a></li>
+                <li><a href="{% url 'coming_soon'%}">Services</a></li>
+                <li><a href="{% url 'contact_us'%}">Contact</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <button class="cta-button">Get Started</button>
+        </nav>
+        <div class="social-media-icons">
+            <a href="https://www.facebook.com/vishal.dudhabarve.31/">
+                <img src="https://lirp.cdn-website.com/bf2cb523/dms3rep/multi/opt/Facebook+Logo-2e7268f6-1920w.jpg" alt="Facebook">
+            </a
+        </div>
+    </header>
+    <main>
+        {% if user.is_authenticated %}
+            <p class="welcome-message">Hello, {{ user.username }}! You are logged in.</p>
+            <br>
+            <a href="{% url 'logout' %}" class="icon-link">
+                <img src="https://thumbs.dreamstime.com/b/logout-vector-icon-logo-design-193333477.jpg" class="icon" alt="Logout Icon">
+            </a>
+        {% else %}
+            <p class="login-message">Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>.</p>
+        {% endif %}
+        <div class="icon-grid">
+            <a href="{% url 'staff_login' %}" class="icon-link">
+                <img src="https://th.bing.com/th/id/R.a5c172c5ba15a75d2e6f3f6d03721831?rik=vbAgpw55nOo46g&riu=http%3a%2f%2fprofessionalpayroll.com%2fwp-content%2fuploads%2f2016%2f04%2femployee-login.jpg&ehk=jHKaBsksxlMDRDvtIkHXbnosq%2f%2bTIN48pAliMCOuF6Q%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="icon" alt="Staff Login">
+            </a>
+            <a href="{% url 'owner_login' %}" class="icon-link">
+                <img src="https://th.bing.com/th/id/OIP.RNaeWunbv8-NLuO9k-0MYQHaHa?rs=1&pid=ImgDetMain" class="icon" alt="Owner Login">
+            </a>
+            <a href="{% url 'notice_board' %}" class="icon-link">
+                <img src="https://th.bing.com/th/id/OIP.cPxiwsVg1_L79lELUFWu3AHaHa?rs=1&pid=ImgDetMain" class="icon" alt="Notice Board">
+            </a>
+            <a href="{% url 'get_leaves' %}" class="icon-link">
+                <img src="https://th.bing.com/th/id/OIP.cKIbJ6CenTJGegvtDWXjEQHaHa?rs=1&pid=ImgDetMain" class="icon" alt="Get Leaves">
+            </a>
+             <a href="{% url 'create_profile' %}" class="icon-link">
+                <img src="https://iconape.com/wp-content/png_logo_vector/google-customize-profile.png" class="icon" alt="Create Profile">
+            </a>
+            <a href="{% url 'credentials' %}" class="icon-link">
+                <img src="https://th.bing.com/th/id/OIP.ZzOgyG91wy4Fa4ntvE0t6wHaHa?rs=1&pid=ImgDetMain" class="icon" alt="Credentials">
+            </a>
+        </div>
+    </main>
+    <script>
+        gsap.from(".icon", { duration: 1, opacity: 0, y: 50, stagger: 0.2 });
+        gsap.from(".welcome-message", { duration: 1.5, opacity: 0, x: -100 });
+        gsap.from(".login-message", { duration: 1.5, opacity: 0, x: 100 });
+    </script>
+</body>
+</html>

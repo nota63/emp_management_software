@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salaries</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e7f3ff; /* Soft blue background color */
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 10px; /* Larger font size */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 10px; /* Compact padding */
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Border between rows */
+            font-size: 7px; /* Compact font size */
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-transform: uppercase; /* Uppercase headers */
+            border-top: 2px solid #ddd; /* Top border for header row */
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+</head>
+<body>
+
+    <br>
+    <br>
+    <table id="salaryTable">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Employee Role</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for salary in salaries %}
+            <tr>
+                <td>{{ salary.employee_name }}</td>
+                <td>{{ salary.employee_role }}</td>
+                <td>{{ salary.salary }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // GSAP animation on page load
+        gsap.from('#salaryTable', { opacity: 0, y: -20, duration: 1, ease: 'ease-in-out' });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Attendance</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Using Google Font 'Roboto' */
+            background-color: #e7f3ff; /* Soft blue background color */
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        section {
+            background-color: #ffffff;
+            max-width: 400px; /* Reduced max-width for a more compact form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        h6 {
+            font-size: 12px; /* Slightly larger font size */
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        form {
+            text-align: center;
+            margin-top: 8px; /* Increased spacing from the heading */
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 7px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 8px; /* Smaller font size */
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+</head>
+<body>
+    <section id="attendanceSection">
+        {% if messages %}
+            {% for m in messages %}
+                <strong>{{ m }}</strong>
+            {% endfor %}
+        {% endif %}
+
+        <h6>Please select a role to check attendance</h6>
+        <form method="post">
+            {% csrf_token %}
+            <select name="role">
+                <option value="manager">Manager</option>
+                <option value="developer">Developer</option>
+                <option value="hr">HR</option>
+                <option value="sales">Sales</option>
+                <option value="marketing">Marketing</option>
+                <option value="support">Support</option>
+                <option value="accountant">Accountant</option>
+                <option value="admin">Admin</option>
+                <option value="it_support">IT Support</option>
+                <option value="project_manager">Project Manager</option>
+                <option value="designer">Designer</option>
+                <option value="product_manager">Product Manager</option>
+                <option value="operations">Operations</option>
+                <option value="executive">Executive</option>
+                <option value="intern">Intern</option>
+                <option value="cleaner">Cleaner</option>
+                <option value="security">Security</option>
+                <option value="piun">PIUN</option>
+            </select>
+            <br><br>
+            <button type="submit">Check</button>
+        </form>
+    </section>
+
+    <script>
+        // GSAP animation on page load
+        gsap.from('#attendanceSection', { opacity: 0, y: -20, duration: 1, ease: 'ease-in-out' });
+    </script>
+</body>
+</html>

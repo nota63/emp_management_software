@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Google Fonts Roboto -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> <!-- GSAP Library -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f5f9; /* Soft blue background color */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 900px;
+            height: 300px;
+            overflow-y: auto; /* Enable scrolling */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease; /* GSAP animation */
+        }
+        h2, h6 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 100%;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        label {
+            font-size: 8px; /* Adjustable font size */
+            font-weight: 500; /* Medium weight */
+            color: #555;
+        }
+        input[type="text"], select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            font-size: 6px; /* Adjustable font size */
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #3498db; /* Light blue button */
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 6px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Employee Profile</h2>
+        <h6>You cannot view your profile for security reasons; only the company can view it.</h6>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
