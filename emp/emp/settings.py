@@ -52,17 +52,17 @@ INSTALLED_APPS = [
     'salaries',
     'tinymce',
     'notice_board',
-    'leaves_for',
     'assets',
     'collect_assets',
     'employee_profile',
     'accounts',
     'calculator',
-    'credentials',
     'owner_credentials',
     'performance',
     'emp_details',
     'contact_us',
+    'chutti',
+    'cred',
 
 ]
 

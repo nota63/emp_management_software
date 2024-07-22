@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Credentials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 135px);
+            gap: 20px; /* Increased gap between containers */
+            justify-content: center;
+        }
+        .box {
+            width: 135px;
+            height: 135px;
+            background-color: #3498db;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* For positioning the delete icon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            padding: 5px;
+            text-align: center;
+            color: #fff;
+        }
+        .delete-icon {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+</head>
+<body>
+     <div>
+         {% if messages %}
+            {% for m in messages %}
+              <p>{{m}}</p>
+            {% endfor %}
+         {% endif %}
+     </div>
+
+
+
+    <div class="container">
+        {% for cred in data %}
+            <div class="box">
+                <p>Web Username :{{ cred.web_username }}<br>Web Password :{{ cred.web_password }}<br>Role :{{ cred.role }}<br>Role Password :{{ cred.role_password }}</p>
+                <a href="{% url 'delete_creds' cred.id %}">
+                    <svg class="delete-icon" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 6h18v2H3V6zm2 3h14v11c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V9zm5 2v7h2v-7H10zm4 0v7h2v-7h-2z"/>
+                    </svg>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        gsap.from(".box", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            stagger: 0.1
+        });
+    </script>
+</body>
+</html>

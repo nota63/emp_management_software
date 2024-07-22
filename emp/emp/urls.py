@@ -39,14 +39,14 @@ urlpatterns = [
     path("collect_assets/",include('collect_assets.urls')),
     path("create_profile/", include('employee_profile.urls')),
     path("calculator/",include('calculator.urls')),
-    path("credentials/",include('credentials.urls')),
     path("update_credentials/",include('owner_credentials.urls')),
     path("add_performance/",include('performance.urls')),
     path('create_id_card/', views.create_and_view_id_card, name='create_and_view_id_card'),
     path("hr_page/",views.hr_page,name='hr_page'),
     path("add_details/",include('emp_details.urls')),
     path("contact_us/",include('contact_us.urls')),
-    path("coming_soon/",views.coming_soon,name='coming_soon')
+    path("coming_soon/",views.coming_soon,name='coming_soon'),
+    path("update_credentials/",include('cred.urls'))
 
 ]
 

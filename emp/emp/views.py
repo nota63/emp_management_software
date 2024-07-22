@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from salaries.models import Salaries
 from notice_board.models import Notice
-from leaves_for.models import Leaves_for
+from chutti.models import Chutti
 import time
 import datetime
 from PIL import Image, ImageDraw, ImageFont
@@ -101,8 +102,8 @@ def notice_board(request):
     return render(request, 'notice_board.html', {'notices': notices})
 
 
+@login_required
 def get_leaves(request):
-    leaves = Leaves_for.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         role = request.POST.get('role')
@@ -113,21 +114,35 @@ def get_leaves(request):
         from_date = request.POST.get('from_date')
         to_date = request.POST.get('to_date')
         status = request.POST.get('status')
-        data = Leaves_for(name=name, role=role, email=email, subject=subject, days=days, date=date, from_date=from_date,
-                          to_date=to_date, status=status)
+
+        # Create Chutti instance
+        data = Chutti(
+            name=name,
+            role=role,
+            email=email,
+            subject=subject,
+            days=days,
+            date=date,
+            from_date=from_date,
+            to_date=to_date,
+            status=status,
+            user=request.user  # Set the logged-in user
+        )
         data.save()
         messages.success(request, 'Application submitted!')
         return redirect('view_leaves')
+
     return render(request, 'get_leaves.html')
 
 
+@login_required
 def view_leaves(request):
-    leaves = Leaves_for.objects.all()
+    leaves = Chutti.objects.filter(user=request.user)
     return render(request, 'view_leaves.html', {'leaves': leaves})
 
 
 def delete_leave(request, leave_id):
-    leaves = get_object_or_404(Leaves_for, id=leave_id)
+    leaves = get_object_or_404(Chutti, id=leave_id)
     leaves.delete()
     messages.success(request, "Leave application canceled!")
     return redirect('view_leaves')
@@ -178,8 +193,8 @@ def generate_id_card(emp_name, emp_role, emp_id, photo_path):
     draw = ImageDraw.Draw(card)
 
     # Load a font
-    font_path = os.path.join(settings.BASE_DIR, 'arial.ttf')  # Ensure arial.ttf is in your BASE_DIR
-    bold_font_path = os.path.join(settings.BASE_DIR, 'arialbd.ttf')  # Ensure arialbd.ttf is in your BASE_DIR
+    font_path = os.path.join(settings.BASE_DIR, 'arial.ttf')
+    bold_font_path = os.path.join(settings.BASE_DIR, 'arialbd.ttf')
     font = ImageFont.truetype(font_path, 20)
     bold_font = ImageFont.truetype(bold_font_path, 24)
 
@@ -206,8 +221,4 @@ def hr_page(request):
 
 # about page
 def coming_soon(request):
-    return render(request,'coming_soon.html')
-
-
-
-
+    return render(request, 'coming_soon.html')
